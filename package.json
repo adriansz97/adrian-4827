@@ -1,0 +1,21 @@
+{
+  "name": "snail-gp-dashboard",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n web,api -c blue,green \"npm run dev -w @snail-gp/web\" \"npm run dev -w @snail-gp/api\"",
+    "build": "npm run build -w @snail-gp/contracts && npm run build -w @snail-gp/api && npm run build -w @snail-gp/web",
+    "lint": "npm run lint -w @snail-gp/api && npm run lint -w @snail-gp/web",
+    "test": "npm run test --workspaces --if-present",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "concurrently": "latest",
+    "prettier": "latest"
+  }
+}
