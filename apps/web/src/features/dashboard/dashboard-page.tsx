@@ -1,20 +1,13 @@
-import { LogOut, WalletCards } from "lucide-react";
+import { CalendarDays } from "lucide-react";
+import { toast } from "sonner";
 
-import { BrandMark } from "@/components/brand-mark";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/features/auth/use-auth";
 
-const currencyFormatter = new Intl.NumberFormat("es-MX", {
-  style: "currency",
-  currency: "MXN",
-});
+import { BalanceCard } from "./balance-card";
+import { BettingChart } from "./betting-chart";
+import { DashboardHeader } from "./dashboard-header";
+import { RaceChart } from "./race-chart";
 
 export function DashboardPage() {
   const { user, logout } = useAuth();
@@ -24,38 +17,47 @@ export function DashboardPage() {
   return (
     <main className="min-h-svh bg-background px-5 py-6 sm:px-8 lg:px-12">
       <div className="mx-auto max-w-6xl">
-        <header className="flex items-center justify-between border-b border-ink/15 pb-5">
-          <BrandMark />
+        <DashboardHeader
+          fullName={user.fullName}
+          email={user.email}
+          onLogout={logout}
+        />
 
-          <Button variant="outline" onClick={logout}>
-            <LogOut aria-hidden="true" />
-            Cerrar sesión
-          </Button>
-        </header>
+        <section className="py-10 sm:py-14">
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-lg text-muted-foreground">
+                Bienvenido, {user.fullName.split(" ")[0]}
+              </p>
 
-        <section className="py-12">
-          <p className="text-lg text-muted-foreground">
-            Bienvenido, {user.fullName}
-          </p>
+              <h1 className="mt-2 max-w-3xl font-display text-5xl leading-[0.95] font-semibold tracking-tight sm:text-7xl">
+                El gran premio, de un vistazo
+              </h1>
+            </div>
 
-          <h1 className="mt-2 font-display text-6xl leading-none font-semibold tracking-tight">
-            Resumen del gran premio
-          </h1>
+            <Badge
+              variant="secondary"
+              className="w-fit rounded-full px-4 py-2 text-sm"
+            >
+              <CalendarDays aria-hidden="true" />
+              Día simulado
+            </Badge>
+          </div>
 
-          <Card className="mt-10 max-w-md border-ink/15">
-            <CardHeader>
-              <CardDescription>Saldo disponible</CardDescription>
+          <div className="mt-10 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+            <BalanceCard
+              balance={user.balance}
+              onTopUp={() =>
+                toast.info("La recarga se habilitará en el siguiente avance.")
+              }
+            />
 
-              <CardTitle className="font-display text-5xl font-semibold">
-                {currencyFormatter.format(user.balance)}
-              </CardTitle>
-            </CardHeader>
+            <BettingChart />
+          </div>
 
-            <CardContent className="flex items-center gap-3 text-sm text-muted-foreground">
-              <WalletCards className="size-5 text-primary" aria-hidden="true" />
-              Las recargas estarán disponibles en el siguiente avance.
-            </CardContent>
-          </Card>
+          <div className="mt-6">
+            <RaceChart />
+          </div>
         </section>
       </div>
     </main>
