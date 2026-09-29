@@ -21,7 +21,9 @@
     "@types/cors": "latest",
     "@types/express": "latest",
     "@types/node": "latest",
+    "@types/supertest": "^7.2.1",
     "oxlint": "latest",
+    "supertest": "^7.3.0",
     "tsx": "latest",
     "typescript": "latest",
     "vitest": "latest"
