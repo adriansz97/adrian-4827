@@ -57,6 +57,16 @@ Servicios disponibles:
 
 Los valores predeterminados permiten ejecutar la aplicación sin configurar variables de entorno.
 
+## Aplicación desplegada
+
+- Frontend: [snail-gp-adrian-4827.onrender.com](https://snail-gp-adrian-4827.onrender.com)
+- API: [snail-gp-adrian-4827-api.onrender.com](https://snail-gp-adrian-4827-api.onrender.com)
+- Estado de la API: [GET /api/health](https://snail-gp-adrian-4827-api.onrender.com/api/health)
+
+Ambos servicios se despliegan en Render desde el archivo `render.yaml`. El frontend se publica como Static Site y la API como Web Service.
+
+La API utiliza el plan gratuito de Render, por lo que puede entrar en reposo después de un periodo sin actividad. La primera solicitud posterior puede tardar aproximadamente un minuto mientras el servicio vuelve a iniciar.
+
 ## Variables de entorno
 
 | Variable                    | Servicio | Valor predeterminado    |
