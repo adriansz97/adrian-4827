@@ -1,8 +1,9 @@
 import { CalendarDays } from "lucide-react";
-import { toast } from "sonner";
+import { useState } from "react";
 
 import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/features/auth/use-auth";
+import { PaymentDialog } from "@/features/payments/payment-dialog";
 
 import { BalanceCard } from "./balance-card";
 import { BettingChart } from "./betting-chart";
@@ -10,7 +11,8 @@ import { DashboardHeader } from "./dashboard-header";
 import { RaceChart } from "./race-chart";
 
 export function DashboardPage() {
-  const { user, logout } = useAuth();
+  const { user, logout, updateBalance } = useAuth();
+  const [isPaymentOpen, setIsPaymentOpen] = useState(false);
 
   if (!user) return null;
 
@@ -47,9 +49,7 @@ export function DashboardPage() {
           <div className="mt-10 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
             <BalanceCard
               balance={user.balance}
-              onTopUp={() =>
-                toast.info("La recarga se habilitará en el siguiente avance.")
-              }
+              onTopUp={() => setIsPaymentOpen(true)}
             />
 
             <BettingChart />
@@ -60,6 +60,13 @@ export function DashboardPage() {
           </div>
         </section>
       </div>
+
+      <PaymentDialog
+        open={isPaymentOpen}
+        onOpenChange={setIsPaymentOpen}
+        user={user}
+        onApproved={updateBalance}
+      />
     </main>
   );
 }
