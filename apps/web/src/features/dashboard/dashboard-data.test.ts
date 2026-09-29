@@ -1,10 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import {
-  bettingSummary,
-  completedRaces,
-  snailResults,
-} from "./dashboard-data";
+import { bettingSummary, completedRaces, snailResults } from "./dashboard-data";
 
 describe("simulated dashboard data", () => {
   it("represents exactly six snails and six completed races", () => {

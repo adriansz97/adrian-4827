@@ -85,8 +85,7 @@ export async function createCharge(
 
 function getResponseMessage(statusDetail: string): string {
   const messages: Record<string, string> = {
-    card_declined:
-      "La tarjeta fue rechazada.",
+    card_declined: "La tarjeta fue rechazada.",
     payment_data_mismatch:
       "Los datos no corresponden a un método de pago aprobado.",
     system_unavailable:
@@ -96,9 +95,7 @@ function getResponseMessage(statusDetail: string): string {
   };
 
   if (statusDetail.startsWith("invalid_request:")) {
-    return statusDetail
-      .replace("invalid_request:", "Revisa los datos:")
-      .trim();
+    return statusDetail.replace("invalid_request:", "Revisa los datos:").trim();
   }
 
   return messages[statusDetail] ?? "La operación no pudo completarse.";

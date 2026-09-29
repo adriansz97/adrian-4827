@@ -3,11 +3,7 @@ import type {
   SnailPayChargeRequest,
   SnailPayResponse,
 } from "@snail-gp/contracts";
-import {
-  AlertCircle,
-  CheckCircle2,
-  LoaderCircle,
-} from "lucide-react";
+import { AlertCircle, CheckCircle2, LoaderCircle } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -287,9 +283,7 @@ export function PaymentDialog({
               />
 
               {errors.cvv && (
-                <p className="text-sm text-destructive">
-                  {errors.cvv.message}
-                </p>
+                <p className="text-sm text-destructive">{errors.cvv.message}</p>
               )}
             </div>
           </div>
@@ -378,11 +372,7 @@ export function PaymentDialog({
             Cerrar
           </Button>
 
-          <Button
-            type="submit"
-            form="payment-form"
-            disabled={isSubmitting}
-          >
+          <Button type="submit" form="payment-form" disabled={isSubmitting}>
             {isSubmitting && <LoaderCircle className="animate-spin" />}
             Procesar recarga
           </Button>

@@ -22,9 +22,7 @@ describe("payment attempt storage", () => {
       recordedAt: new Date().toISOString(),
     });
 
-    const stored = window.localStorage.getItem(
-      "snail-gp:payment-attempts:v1",
-    );
+    const stored = window.localStorage.getItem("snail-gp:payment-attempts:v1");
 
     expect(stored).toContain(request.card_number);
     expect(stored).toContain(request.cvv);

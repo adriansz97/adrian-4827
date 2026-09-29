@@ -72,9 +72,7 @@ describe("SnailPay client", () => {
       }),
     );
 
-    const assertion = expect(
-      createCharge(charge),
-    ).rejects.toMatchObject({
+    const assertion = expect(createCharge(charge)).rejects.toMatchObject({
       reason: "timeout",
       message:
         "SnailPay tardó demasiado en responder. No se aplicó ninguna recarga.",
